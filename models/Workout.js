@@ -32,7 +32,13 @@ const workoutSchema = new Schema(
 }
 );
 
+workoutSchema.virtual("totalDuration").get(function() {
+    return this.exercises.reduce((total, value) => {
+        return total + value.duration;
+    },0);
+});
+
 
 const Workout = model('workout', workoutSchema);
 
-module.exports = Workout
+module.exports = Workout;

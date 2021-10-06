@@ -2,7 +2,6 @@ const Workout = require("../models")
 
 module.exports = {
     addWorkout(req, res) {
-        console.log("addWorkout")
         Workout.create({})
         .then((workout) => res.json(workout))
         .catch((err) => {
@@ -11,8 +10,6 @@ module.exports = {
           });
     },
     addExercise(req, res) {
-        console.log("addExercise")
-        console.log(req.body)
         Workout.findByIdAndUpdate(req.params.id,
             {$push: {exercises: req.body}}
             )
