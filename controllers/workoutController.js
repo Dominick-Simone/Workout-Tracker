@@ -33,14 +33,14 @@ module.exports = {
             return res.status(500).json(err);
           });
     },
-    getWorkouts(req,res) {
-        Workout.aggregate({
+    getWorkoutsInRange(req,res) {
+        Workout.aggregate([{
             $addFields: {
                 totalDuration: {
-                    $sum: "$exercise.duration"
+                    $sum: "$exercises.duration"
                 }
             }
-        })
+        }])
         .sort({ day: -1 })
         .limit(7)
         .then((workout) => res.json(workout))
