@@ -27,16 +27,7 @@ const workoutSchema = new Schema(
         }
     ]
 }, 
-{
-    toJSON: {virtuals: true}
-}
 );
-
-workoutSchema.virtual("totalDuration").get(function() {
-    return this.exercises.reduce((total, value) => {
-        return total + value.duration;
-    },0);
-});
 
 
 const Workout = model('workout', workoutSchema);
