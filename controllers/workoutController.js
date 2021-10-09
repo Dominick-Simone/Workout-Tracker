@@ -20,13 +20,13 @@ module.exports = {
           });
     },
     getWorkouts(req,res) {
-        Workout.aggregate({
+        Workout.aggregate([{
             $addFields: {
                 totalDuration: {
-                    $sum: "$exercise.duration"
+                    $sum: "$exercises.duration"
                 }
             }
-        })
+        }])
         .then((workout) => res.json(workout))
         .catch((err) => {
             console.log(err);
